@@ -1,0 +1,72 @@
+CREATE TABLE Department(
+Dept_ID INT PRIMARY KEY NOT NULL,
+Dept_Name VARCHAR(50)
+);
+
+CREATE TABLE Student(
+Student_ID INT PRIMARY KEY,
+Student_Name VARCHAR(50),
+Email VARCHAR(100),
+Age INT CHECK(Age>=20),
+Dept_ID INT,
+FOREIGN KEY(Dept_ID)
+REFERENCES Department(Dept_ID)
+);
+
+CREATE TABLE Course(
+Course_ID INT PRIMARY KEY,
+Course_Name VARCHAR(50) NOT NULL,
+Credits INT CHECK(Credits>=1 AND Credits<=5),
+Dept_ID INT,
+FOREIGN KEY(Dept_ID)
+REFERENCES Department(Dept_ID)
+);
+
+CREATE TABLE Enrollments(
+Enrollment_ID INT PRIMARY KEY,
+Student_ID INT,
+Course_name VARCHAR(50) NOT NULL,
+Semester VARCHAR(20) NOT NULL,
+FOREIGN KEY(Student_ID)
+REFERENCES Student(Student_ID)
+);
+
+INSERT INTO Department VALUES
+(101,'Computer'),
+(102,'IT'),
+(103,'ENTC'),
+(104,'Mechanical'),
+(105,'Civil');
+
+INSERT INTO Student VALUES
+(1,'Raj','raj@gmail.com',20,101),
+(2,'Amit','amit@gmail.com',21,102),
+(3,'Neha','neha@gmail.com',22,103),
+(4,'Priya','priya@gmail.com',20,104),
+(5,'Karan','karan@gmail.com',23,105);
+
+INSERT INTO Course VALUES
+(201,'DBMS',4,101),
+(202,'Java',3,102),
+(203,'Python',5,103),
+(204,'CN',4,104),
+(205,'OS',3,105);
+
+INSERT INTO Enrollments VALUES
+(1,1,'DBMS','Sem4'),
+(2,2,'Java','Sem4'),
+(3,3,'Python','Sem5'),
+(4,4,'CN','Sem6'),
+(5,5,'OS','Sem5');
+
+SELECT * FROM Department;
+SELECT * FROM Student;
+SELECT * FROM Course;
+SELECT * FROM Enrollments;
+
+ALTER TABLE Student
+ADD CONSTRAINT email_unique
+UNIQUE(Email);
+
+INSERT INTO Student VALUES
+(6,'Rohan','raj@gmail.com',21,101);
