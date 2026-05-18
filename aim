@@ -1,0 +1,96 @@
+Practical 2.3 — DDL Operations
+
+Aim:
+To create database tables and perform DDL operations such as ALTER, RENAME, DROP, and TRUNCATE on database relations.
+
+Objectives:
+• Create Employee, Department, and Student tables.
+• Modify table structures using ALTER commands.
+• Rename tables and columns.
+• Remove records and columns.
+
+Theory:
+DDL (Data Definition Language) commands are used
+to create and modify the structure of database objects. 
+Commands like CREATE, ALTER, RENAME, DROP, and TRUNCATE help manage database schema.
+These commands define tables, change structures, and organize data efficiently.
+
+Conclusion:
+Successfully created tables and performed DDL operations on the database.
+
+
+
+
+
+
+Practical 3.3 — Users, Roles and Transactions
+
+Aim:
+To create users and roles, assign privileges, and perform transaction control operations.
+
+Objectives:
+• Create users and roles.
+• Grant and revoke permissions.
+• Use transaction commands.
+• Perform rollback and commit operations.
+
+Theory:
+Transaction Control Language (TCL) commands are 
+used to manage database transactions. COMMIT saves 
+changes permanently, ROLLBACK cancels changes, and SAVEPOINT
+creates intermediate restore points. User privileges
+and roles improve security and control access to database resources.
+
+Conclusion:
+Successfully implemented user access control and transaction management.
+
+
+
+
+
+Practical 8 — Database Trigger
+
+Aim:
+To implement triggers for salary validation and restricting invalid operations.
+
+Objectives:
+• Create INSERT and UPDATE triggers.
+• Validate employee salary.
+• Prevent invalid deletion operations.
+
+Theory:
+Triggers are database objects that automatically 
+execute in response to events such as INSERT, 
+UPDATE, and DELETE. They help enforce business 
+rules, maintain data integrity, and automate 
+validation processes within the database.
+
+Conclusion:
+Successfully created triggers and validated employee operations.
+
+
+
+
+Practical 10 — MongoDB Aggregation
+
+Aim:
+To perform aggregation operations using MongoDB employee collection.
+
+Objectives:
+• Insert employee documents.
+• Apply grouping and filtering.
+• Calculate salary statistics.
+• Store results in new collections.
+
+Theory:
+MongoDB aggregation framework processes
+documents through multiple stages called pipelines.
+Operators such as $match, $group, $sum, $avg, $max, 
+and $min are used to filter, group, and calculate results efficiently.
+
+Conclusion:
+Successfully performed aggregation operations and analyzed collection data.
+
+
+
+
