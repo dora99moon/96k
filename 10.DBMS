@@ -1,0 +1,249 @@
+```javascript
+// Step 1: Create and switch database
+use EmployeeDB
+
+// OP:
+// switched to db EmployeeDB
+
+
+
+// Step 2: Insert employee records
+
+db.Employee.insertMany([
+{
+Empid:1,
+Name:{FName:"Rahul",LName:"Sharma"},
+CompanyName:"TCS",
+Salary:70000,
+Designation:"Developer",
+Age:25,
+Expertise:"Java",
+DOB:"1999-03-12",
+EmailId:"rahul@gmail.com",
+Contact:"9876543210"
+},
+{
+Empid:2,
+Name:{FName:"Amit",LName:"Patil"},
+CompanyName:"Infosys",
+Salary:50000,
+Designation:"Tester",
+Age:27,
+Expertise:"Python",
+DOB:"1997-06-20",
+EmailId:"amit@gmail.com",
+Contact:"9876543211"
+},
+{
+Empid:3,
+Name:{FName:"Sneha",LName:"Joshi"},
+CompanyName:"TCS",
+Salary:80000,
+Designation:"Manager",
+Age:30,
+Expertise:"AI",
+DOB:"1994-08-15",
+EmailId:"sneha@gmail.com",
+Contact:"9876543212"
+},
+{
+Empid:4,
+Name:{FName:"Priya",LName:"Kadam"},
+CompanyName:"Wipro",
+Salary:65000,
+Designation:"Developer",
+Age:26,
+Expertise:"NodeJS",
+DOB:"1998-11-10",
+EmailId:"priya@gmail.com",
+Contact:"9876543213"
+},
+{
+Empid:5,
+Name:{FName:"Rohan",LName:"Deshmukh"},
+CompanyName:"Infosys",
+Salary:90000,
+Designation:"Team Lead",
+Age:32,
+Expertise:"Cloud",
+DOB:"1992-01-22",
+EmailId:"rohan@gmail.com",
+Contact:"9876543214"
+}
+])
+
+// OP:
+// {
+// acknowledged:true,
+// insertedIds:{...}
+// }
+
+
+
+// Step 3: Display inserted records
+
+db.Employee.find().forEach(printjson)
+
+// OP:
+// Displays all 5 employee records
+
+
+
+// Step 4:
+// Find total salary of employees whose salary >60000 grouped by company
+
+db.Employee.aggregate([
+{$match:{Salary:{$gt:60000}}},
+{$group:{
+_id:"$CompanyName",
+TotalSalary:{$sum:"$Salary"}
+}}
+]).forEach(printjson)
+
+// OP:
+// {
+// _id:'TCS',
+// TotalSalary:150000
+// }
+// {
+// _id:'Wipro',
+// TotalSalary:65000
+// }
+// {
+// _id:'Infosys',
+// TotalSalary:90000
+// }
+
+
+
+// Step 5:
+// Return Max and Min salary for each company
+
+db.Employee.aggregate([
+{$group:{
+_id:"$CompanyName",
+MaxSalary:{$max:"$Salary"},
+MinSalary:{$min:"$Salary"}
+}}
+]).forEach(printjson)
+
+// OP:
+// {
+// _id:'TCS',
+// MaxSalary:80000,
+// MinSalary:70000
+// }
+// {
+// _id:'Infosys',
+// MaxSalary:90000,
+// MinSalary:50000
+// }
+// {
+// _id:'Wipro',
+// MaxSalary:65000,
+// MinSalary:65000
+// }
+
+
+
+// Step 6:
+// Calculate total salary by company and store output in new collection
+
+db.Employee.aggregate([
+{$group:{
+_id:"$CompanyName",
+TotalSalary:{$sum:"$Salary"}
+}},
+{$out:"CompanySalary"}
+])
+
+// OP:
+// Operation completed successfully
+
+
+
+// Step 7:
+// Display new collection data
+
+db.CompanySalary.find().forEach(printjson)
+
+// OP:
+// {
+// _id:'TCS',
+// TotalSalary:150000
+// }
+// {
+// _id:'Infosys',
+// TotalSalary:140000
+// }
+// {
+// _id:'Wipro',
+// TotalSalary:65000
+// }
+
+
+
+// Step 8:
+// Count employees per designation
+
+db.Employee.aggregate([
+{$group:{
+_id:"$Designation",
+Count:{$sum:1}
+}}
+]).forEach(printjson)
+
+// OP:
+// {
+// _id:'Developer',
+// Count:2
+// }
+// {
+// _id:'Tester',
+// Count:1
+// }
+// {
+// _id:'Manager',
+// Count:1
+// }
+// {
+// _id:'Team Lead',
+// Count:1
+// }
+
+
+
+// Step 9:
+// Display total count of employees
+
+db.Employee.countDocuments()
+
+// OP:
+// 5
+
+
+
+// Step 10:
+// Calculate average salary of each company
+
+db.Employee.aggregate([
+{$group:{
+_id:"$CompanyName",
+AverageSalary:{$avg:"$Salary"}
+}}
+]).forEach(printjson)
+
+// OP:
+// {
+// _id:'TCS',
+// AverageSalary:75000
+// }
+// {
+// _id:'Infosys',
+// AverageSalary:70000
+// }
+// {
+// _id:'Wipro',
+// AverageSalary:65000
+// }
+```
