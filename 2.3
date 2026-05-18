@@ -1,0 +1,58 @@
+CREATE TABLE Employee(
+    emp_id INT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    department VARCHAR(50),
+    salary DECIMAL(10,2)
+);
+
+CREATE TABLE Department(
+    dept_id INT PRIMARY KEY,
+    dept_name VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Student(
+    id INT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    dob DATE,
+    marks INT
+);
+
+ALTER TABLE Employee
+ADD email VARCHAR(100);
+
+ALTER TABLE Employee
+RENAME COLUMN department TO dept_name;
+
+ALTER TABLE Employee
+RENAME COLUMN name TO emp_name;
+
+ALTER TABLE Department
+RENAME TO Dept;
+
+DROP TABLE Dept;
+
+INSERT INTO Student VALUES
+(1,'Raj','2003-05-10',85);
+
+INSERT INTO Student VALUES
+(2,'Amit','2002-07-15',72);
+
+INSERT INTO Student VALUES
+(3,'Priya','2004-02-11',91);
+
+INSERT INTO Student VALUES
+(4,'Neha','2003-09-08',67);
+
+INSERT INTO Student VALUES
+(5,'Karan','2002-12-20',80);
+
+SELECT * FROM Student;
+
+TRUNCATE TABLE Student;
+
+SELECT * FROM Student;
+
+ALTER TABLE Employee
+DROP COLUMN salary;
+
+DESC Employee;
