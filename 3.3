@@ -1,0 +1,89 @@
+CREATE TABLE Student(
+    Student_ID INT PRIMARY KEY,
+    Student_Name VARCHAR(50) NOT NULL,
+    Email VARCHAR(100),
+    Age INT,
+    Dept_ID INT
+);
+
+CREATE TABLE Course(
+    Course_ID INT PRIMARY KEY,
+    Course_Name VARCHAR(50) NOT NULL,
+    Credits INT,
+    Dept_ID INT
+);
+
+INSERT INTO Student VALUES
+(1,'Raj','raj@gmail.com',20,101),
+(2,'Amit','amit@gmail.com',21,102),
+(3,'Priya','priya@gmail.com',22,101),
+(4,'Neha','neha@gmail.com',23,103),
+(5,'Karan','karan@gmail.com',20,102);
+
+INSERT INTO Course VALUES
+(101,'DBMS',4,101),
+(102,'Java',3,102),
+(103,'Python',5,103),
+(104,'CN',4,101),
+(105,'OS',3,102);
+
+CREATE USER 'college_db'@'localhost'
+IDENTIFIED BY 'password';
+
+GRANT SELECT,INSERT
+ON Student
+TO 'college_db'@'localhost';
+
+GRANT SELECT,INSERT
+ON Course
+TO 'college_db'@'localhost';
+
+REVOKE INSERT
+ON Student
+FROM 'college_db'@'localhost';
+
+REVOKE INSERT
+ON Course
+FROM 'college_db'@'localhost';
+
+CREATE ROLE faculty_role;
+
+CREATE ROLE student_role;
+
+GRANT SELECT
+ON Course
+TO 'college_db'@'localhost'
+WITH GRANT OPTION;
+
+START TRANSACTION;
+
+INSERT INTO Course
+VALUES(106,'AI',4,104);
+
+SAVEPOINT sp1;
+
+DELETE FROM Course
+WHERE Course_ID=106;
+
+ROLLBACK TO sp1;
+
+COMMIT;
+
+SELECT * FROM Course;
+
+START TRANSACTION;
+
+UPDATE Student
+SET Email='newraj@gmail.com'
+WHERE Student_ID=1;
+
+UPDATE Student
+SET Email='newamit@gmail.com'
+WHERE Student_ID=2;
+
+COMMIT;
+
+DROP ROLE faculty_role;
+
+SHOW GRANTS
+FOR 'college_db'@'localhost';
